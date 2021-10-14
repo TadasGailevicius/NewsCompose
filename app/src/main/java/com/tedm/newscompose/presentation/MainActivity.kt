@@ -1,4 +1,4 @@
-package com.tedm.newscompose
+package com.tedm.newscompose.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
