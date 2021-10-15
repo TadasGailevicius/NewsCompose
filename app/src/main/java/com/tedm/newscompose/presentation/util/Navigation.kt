@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.tedm.newscompose.presentation.history.HistoryScreen
 import com.tedm.newscompose.presentation.main.MainScreen
 import com.tedm.newscompose.presentation.splash.SplashScreen
 
@@ -24,8 +25,8 @@ fun Navigation(navController: NavHostController) {
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color.White,
-                        Color.Blue
+                        Color(0xFF01B09A),
+                        Color(0xFF96C93D)
                     )
                 )
             ),
@@ -35,6 +36,9 @@ fun Navigation(navController: NavHostController) {
         }
         composable(Screen.MainScreen.route) {
             MainScreen(navController = navController)
+        }
+        composable(Screen.HistoryScreen.route) {
+            HistoryScreen(navController = navController)
         }
     }
 
