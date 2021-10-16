@@ -30,7 +30,7 @@ fun StandardTextField(
     maxLength: Int = 40,
     error: String = "",
     textStyle: TextStyle = TextStyle(
-        color = MaterialTheme.colors.onBackground
+        color = Color(0xFF92c83f)
     ),
     singleLine: Boolean = true,
     maxLines: Int = 1,
