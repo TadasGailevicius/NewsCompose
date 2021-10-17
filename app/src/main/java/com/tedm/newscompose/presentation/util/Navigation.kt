@@ -3,6 +3,7 @@ package com.tedm.newscompose.presentation.util
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -16,7 +17,10 @@ import com.tedm.newscompose.presentation.splash.SplashScreen
 
 @ExperimentalMaterialApi
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(
+    navController: NavHostController,
+    scaffoldState: ScaffoldState
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.SplashScreen.route,
@@ -35,7 +39,7 @@ fun Navigation(navController: NavHostController) {
             SplashScreen(navController = navController)
         }
         composable(Screen.MainScreen.route) {
-            MainScreen(navController = navController)
+            MainScreen(navController = navController, scaffoldState = scaffoldState)
         }
         composable(Screen.HistoryScreen.route) {
             HistoryScreen(navController = navController)

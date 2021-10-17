@@ -20,7 +20,7 @@ fun HistoryScreen(
         HistoryItem(
             historyItem = com.tedm.newscompose.domain.models.HistoryItem(
                 description = "overcast clouds",
-                temp = 14,
+                temp = 14.0,
                 tempMax = 285.3,
                 dt = 1634322168,
                 name = "Kaunas"
@@ -29,7 +29,7 @@ fun HistoryScreen(
         HistoryItem(
             historyItem = com.tedm.newscompose.domain.models.HistoryItem(
                 description = "overcast clouds",
-                temp = 16,
+                temp = 16.0,
                 tempMax = 285.3,
                 dt = 1634322168,
                 name = "Kaunas"

@@ -59,8 +59,8 @@ data class WeatherResponse(
     fun toHistoryItem() : HistoryItem {
         return HistoryItem(
             description = weather[0].description,
-            temp = main.temp,
-            tempMax = main.temp_max,
+            temp = main.temp - 273.15,
+            tempMax = main.temp_max - 273.15,
             dt = dt,
             name = name,
         )

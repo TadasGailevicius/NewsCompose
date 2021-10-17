@@ -5,30 +5,64 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.material.ScaffoldState
+import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.tedm.newscompose.presentation.ui.theme.SpaceLarge
 import com.tedm.newscompose.presentation.ui.theme.SpaceMedium
 import com.tedm.newscompose.R
+import com.tedm.newscompose.domain.models.HistoryItem
 import com.tedm.newscompose.presentation.components.CustomButton
+import com.tedm.newscompose.presentation.components.HistoryItem
 import com.tedm.newscompose.presentation.components.StandardTextField
 import com.tedm.newscompose.presentation.ui.theme.SpaceSmall
 import com.tedm.newscompose.presentation.util.Screen
+import com.tedm.newscompose.util.Resource
+import com.tedm.newscompose.util.UiEvent
+import com.tedm.newscompose.util.asString
+import kotlinx.coroutines.flow.collectLatest
+import java.lang.Math.round
+import kotlin.math.roundToInt
 
 @Composable
 fun MainScreen(
+    scaffoldState: ScaffoldState,
     navController: NavController,
     viewModel: MainViewModel = hiltViewModel()
 ) {
+
+    val state = viewModel.state.value
+    var description by remember { mutableStateOf("") }
+    var temp by remember { mutableStateOf(0.0) }
+    var tempMax by remember { mutableStateOf(0.0) }
+    var dt by remember { mutableStateOf(0) }
+    var name by remember { mutableStateOf("") }
+
+    val context = LocalContext.current
+    LaunchedEffect(key1 = true) {
+        viewModel.getWeather()
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is UiEvent.ShowSnackbar -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.uiText.asString(context)
+                    )
+                }
+            }
+        }
+
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -55,18 +89,27 @@ fun MainScreen(
             Row(Modifier.height(IntrinsicSize.Min)) {
                 Column(modifier = Modifier.weight(8f)) {
                     StandardTextField(
-                        text = viewModel.usernameText.value,
+                        text = viewModel.cityText.value,
                         onValueChange = {
-                            viewModel.setUsernameText(it)
+                            viewModel.setCityText(it)
                         },
                         keyboardType = KeyboardType.Email,
-                        error = viewModel.usernameError.value,
+                        error = viewModel.cityError.value,
                         hint = stringResource(id = R.string.enter_city_name),
                     )
                 }
                 Spacer(modifier = Modifier.width(SpaceSmall))
                 IconButton(
-                    onClick = { navController.navigate(Screen.HistoryScreen.route) },
+                    onClick = {
+                        viewModel.getWeather()
+                        state.historyItem?.let { historyItem ->
+                            description = historyItem.description
+                            temp = historyItem.temp
+                            tempMax = historyItem.tempMax
+                            dt = historyItem.dt
+                            name = historyItem.name
+                        }
+                    },
                     modifier = Modifier
                         .weight(2f)
                         .clip(
@@ -93,7 +136,16 @@ fun MainScreen(
                     navController.navigate(Screen.HistoryScreen.route)
                 }
             )
-
+            Spacer(modifier = Modifier.height(SpaceMedium))
+            HistoryItem(
+                historyItem = HistoryItem(
+                    description = description,
+                    temp = temp.roundToInt().toDouble(),
+                    tempMax = tempMax,
+                    dt = dt,
+                    name = name
+                )
+            )
         }
 
     }
