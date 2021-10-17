@@ -1,5 +1,46 @@
 package com.tedm.newscompose.domain.remote.responses
 
+import com.tedm.newscompose.domain.models.HistoryItem
+
+data class Clouds(
+    val all: Int
+)
+
+data class Coord(
+    val lat: Double,
+    val lon: Double
+)
+
+data class Main(
+    val feels_like: Double,
+    val humidity: Int,
+    val pressure: Int,
+    val temp: Double,
+    val temp_max: Double,
+    val temp_min: Double
+)
+
+data class Sys(
+    val country: String,
+    val id: Int,
+    val sunrise: Int,
+    val sunset: Int,
+    val type: Int
+)
+
+data class Weather(
+    val description: String,
+    val icon: String,
+    val id: Int,
+    val main: String
+)
+
+data class Wind(
+    val deg: Int,
+    val gust: Double,
+    val speed: Double
+)
+
 data class WeatherResponse(
     val base: String,
     val clouds: Clouds,
@@ -14,4 +55,14 @@ data class WeatherResponse(
     val visibility: Int,
     val weather: List<Weather>,
     val wind: Wind
-)
+) {
+    fun toHistoryItem() : HistoryItem {
+        return HistoryItem(
+            description = weather[0].description,
+            temp = main.temp - 273.15,
+            tempMax = main.temp_max - 273.15,
+            dt = dt,
+            name = name,
+        )
+    }
+}

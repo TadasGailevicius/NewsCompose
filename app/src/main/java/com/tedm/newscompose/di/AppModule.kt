@@ -1,7 +1,10 @@
 package com.tedm.newscompose.di
 
 import com.tedm.newscompose.domain.remote.WeatherApi
+import com.tedm.newscompose.domain.use_case.GetWeatherUseCase
+import com.tedm.newscompose.domain.use_case.WeatherUseCases
 import com.tedm.newscompose.repository.WeatherRepository
+import com.tedm.newscompose.repository.WeatherRepositoryImpl
 import com.tedm.newscompose.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -15,13 +18,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideWeatherRepository(
         api: WeatherApi
-    ) = WeatherRepository(api)
+    ): WeatherRepository {
+        return WeatherRepositoryImpl(api)
+    }
 
-    @Singleton @Provides
+    @Singleton
+    @Provides
     fun provideWeatherApi(): WeatherApi {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -29,5 +35,14 @@ object AppModule {
             .build()
             .create(WeatherApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideWeatherUseCases(repository: WeatherRepository): WeatherUseCases {
+        return WeatherUseCases(
+            getWeather = GetWeatherUseCase(repository = repository)
+        )
+    }
+
 
 }

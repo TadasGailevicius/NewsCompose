@@ -72,7 +72,7 @@ fun HistoryItem(
                         text = buildAnnotatedString {
                             append(historyItem.name)
                         },
-                        fontSize = 24.sp,
+                        fontSize = 16.sp,
                         style = MaterialTheme.typography.h2
                     )
                     Spacer(modifier = Modifier.height(SpaceSmall))
@@ -81,7 +81,7 @@ fun HistoryItem(
                             append(historyItem.temp.toString())
                             append("°")
                         },
-                        fontSize = 96.sp,
+                        fontSize = 32.sp,
                         style = MaterialTheme.typography.h2,
                     )
                     Spacer(modifier = Modifier.height(SpaceSmall))
@@ -89,7 +89,7 @@ fun HistoryItem(
                         text = buildAnnotatedString {
                             append("SAT\n01")
                         },
-                        fontSize = 24.sp,
+                        fontSize = 16.sp,
                         style = MaterialTheme.typography.h2
                     )
                 }
