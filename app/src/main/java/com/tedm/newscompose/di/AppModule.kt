@@ -2,6 +2,7 @@ package com.tedm.newscompose.di
 
 import android.content.Context
 import androidx.room.Room
+import com.tedm.newscompose.domain.local.HistoryItemDao
 import com.tedm.newscompose.domain.local.HistoryItemDatabase
 import com.tedm.newscompose.domain.remote.WeatherApi
 import com.tedm.newscompose.domain.use_case.GetWeatherUseCase
@@ -27,7 +28,7 @@ object AppModule {
     @Provides
     fun provideHistoryItemDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(context, HistoryItemDatabase::class.java, DATABASE_NAME).build()
+    ) = Room.databaseBuilder(context, HistoryItemDatabase::class.java, DATABASE_NAME).allowMainThreadQueries().build()
 
     @Singleton
     @Provides
@@ -36,9 +37,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideWeatherRepository(
+        dao: HistoryItemDao,
         api: WeatherApi
     ): WeatherRepository {
-        return WeatherRepositoryImpl(api)
+        return WeatherRepositoryImpl(dao,api)
     }
 
     @Singleton

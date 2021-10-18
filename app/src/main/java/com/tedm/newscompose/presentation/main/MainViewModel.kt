@@ -4,7 +4,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tedm.newscompose.domain.models.HistoryItem
 import com.tedm.newscompose.domain.use_case.WeatherUseCases
 import com.tedm.newscompose.repository.WeatherRepository
 import com.tedm.newscompose.util.Resource
@@ -46,6 +45,10 @@ class MainViewModel @Inject constructor(
     private val _state = mutableStateOf(WeatherState())
     val state: State<WeatherState> = _state
 
+    private fun insertHistoryItem() = viewModelScope.launch {
+        repository.insertHistoryItem(historyItem = state.value.historyItem)
+    }
+
     fun getWeather() {
         viewModelScope.launch {
             _state.value = state.value.copy(
@@ -60,6 +63,8 @@ class MainViewModel @Inject constructor(
                         historyItem = result.data,
                         isLoading = false
                     )
+                    insertHistoryItem()
+
                 }
                 is Resource.Error -> {
                     _state.value = state.value.copy(

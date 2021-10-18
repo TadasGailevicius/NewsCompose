@@ -81,7 +81,7 @@ fun HistoryItem(
                             append(historyItem.temp.toString())
                             append("°")
                         },
-                        fontSize = 32.sp,
+                        fontSize = 72.sp,
                         style = MaterialTheme.typography.h2,
                     )
                     Spacer(modifier = Modifier.height(SpaceSmall))
