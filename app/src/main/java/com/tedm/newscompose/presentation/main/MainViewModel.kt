@@ -52,7 +52,7 @@ class MainViewModel @Inject constructor(
                 isLoading = true
             )
             val result = weatherUseCases.getWeather(
-                cityName = _cityText.value ?: ""
+                cityName = _cityText.value
             )
             when (result) {
                 is Resource.Success -> {
