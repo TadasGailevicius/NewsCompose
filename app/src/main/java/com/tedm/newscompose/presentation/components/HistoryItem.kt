@@ -20,6 +20,13 @@ import com.tedm.newscompose.domain.models.HistoryItem
 import com.tedm.newscompose.presentation.ui.theme.SpaceMedium
 import com.tedm.newscompose.presentation.ui.theme.SpaceSmall
 import com.tedm.newscompose.R
+import java.security.Timestamp
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.TextStyle
+import java.util.*
+import kotlin.math.roundToInt
 
 @Composable
 fun HistoryItem(
@@ -73,7 +80,7 @@ fun HistoryItem(
                         text = buildAnnotatedString {
                             append(historyItem.name)
                         },
-                        fontSize = 16.sp,
+                        fontSize = 20.sp,
                         style = MaterialTheme.typography.h2,
                         color = when {
                             historyItem.temp <= 10 -> {
@@ -90,10 +97,10 @@ fun HistoryItem(
                     Spacer(modifier = Modifier.height(SpaceSmall))
                     Text(
                         text = buildAnnotatedString {
-                            append(historyItem.temp.toString())
+                            append(historyItem.temp.roundToInt().toString())
                             append("°")
                         },
-                        fontSize = 72.sp,
+                        fontSize = 96.sp,
                         style = MaterialTheme.typography.h2,
                         color = when {
                             historyItem.temp <= 10 -> {
@@ -108,24 +115,54 @@ fun HistoryItem(
                         }
                     )
                     Spacer(modifier = Modifier.height(SpaceSmall))
-                    Text(
-                        text = buildAnnotatedString {
-                            append("SAT\n01")
-                        },
-                        fontSize = 16.sp,
-                        style = MaterialTheme.typography.h2,
-                        color = when {
-                            historyItem.temp <= 10 -> {
-                                Color.Red
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = buildAnnotatedString {
+                                val dt = Instant.ofEpochSecond(historyItem.dt.toLong())
+                                    .atZone(ZoneId.systemDefault())
+                                    .toLocalDateTime()
+                                append(dt.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US).toString())
+                            },
+                            fontSize = 20.sp,
+                            style = MaterialTheme.typography.h2,
+                            color = when {
+                                historyItem.temp <= 10 -> {
+                                    Color.Red
+                                }
+                                historyItem.temp < 20 -> {
+                                    Color.Green
+                                }
+                                else -> {
+                                    Color.Yellow
+                                }
                             }
-                            historyItem.temp < 20 -> {
-                                Color.Green
+                        )
+
+                        Text(
+                            text = buildAnnotatedString {
+                                val dt = Instant.ofEpochSecond(historyItem.dt.toLong())
+                                    .atZone(ZoneId.systemDefault())
+                                    .toLocalDateTime()
+                                append(dt.dayOfMonth.toString())
+                            },
+                            fontSize = 20.sp,
+                            style = MaterialTheme.typography.h2,
+                            color = when {
+                                historyItem.temp <= 10 -> {
+                                    Color.Red
+                                }
+                                historyItem.temp < 20 -> {
+                                    Color.Green
+                                }
+                                else -> {
+                                    Color.Yellow
+                                }
                             }
-                            else -> {
-                                Color.Yellow
-                            }
-                        }
-                    )
+                        )
+
+                    }
                 }
             }
 

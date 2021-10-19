@@ -11,5 +11,8 @@ sealed class UiText {
         fun unknownError(): UiText {
             return StringResource(R.string.error_unknown)
         }
+        fun cityHasBeenLoaded(): UiText {
+            return StringResource(R.string.city_loaded)
+        }
     }
 }

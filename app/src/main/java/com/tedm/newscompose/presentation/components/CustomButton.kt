@@ -39,7 +39,7 @@ fun CustomButton(
             ) {
                 Text(
                     text = stringResource(id = R.string.view_history),
-                    color = MaterialTheme.colors.onSurface
+                    color = Color.White
                 )
             }
 

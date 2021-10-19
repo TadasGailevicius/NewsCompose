@@ -64,15 +64,22 @@ class MainViewModel @Inject constructor(
                         isLoading = false
                     )
                     insertHistoryItem()
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackbar(
+                            uiText = result.uiText ?: UiText.cityHasBeenLoaded()
+                        )
+                    )
 
                 }
                 is Resource.Error -> {
                     _state.value = state.value.copy(
                         isLoading = false
                     )
-                    _eventFlow.emit(UiEvent.ShowSnackbar(
-                        uiText = result.uiText ?: UiText.unknownError()
-                    ))
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackbar(
+                            uiText = result.uiText ?: UiText.unknownError()
+                        )
+                    )
                 }
             }
         }

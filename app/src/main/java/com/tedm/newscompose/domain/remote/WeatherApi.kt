@@ -12,6 +12,6 @@ interface WeatherApi {
         @Query("q")
         cityName: String,
         @Query("appid")
-        apiKey: String = API_KEY,
+        apiKey: String = API_KEY
     ): WeatherResponse
 }

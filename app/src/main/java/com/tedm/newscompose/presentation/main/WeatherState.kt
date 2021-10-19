@@ -4,5 +4,5 @@ import com.tedm.newscompose.domain.models.HistoryItem
 
 data class WeatherState(
     val historyItem: HistoryItem? = null,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
 )

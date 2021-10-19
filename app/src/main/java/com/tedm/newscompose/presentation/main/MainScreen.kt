@@ -28,6 +28,7 @@ import com.tedm.newscompose.presentation.util.Screen
 import com.tedm.newscompose.util.UiEvent
 import com.tedm.newscompose.util.asString
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @Composable
 fun MainScreen(
@@ -35,9 +36,11 @@ fun MainScreen(
     navController: NavController,
     viewModel: MainViewModel = hiltViewModel()
 ) {
+
+    val state = viewModel.state.value
+
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
-        viewModel.getWeather()
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
                 is UiEvent.ShowSnackbar -> {
@@ -99,14 +102,13 @@ fun MainScreen(
                                 bottomStart = 0.dp
                             )
                         )
-                        .fillMaxHeight()
+                        .fillMaxSize()
                         .background(Color.White)
 
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.arrow_green),
                         contentDescription = "Button",
-                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
@@ -116,6 +118,11 @@ fun MainScreen(
                     navController.navigate(Screen.HistoryScreen.route)
                 }
             )
+            /*
+            if(state.isLoading) {
+                CircularProgressIndicator()
+            }
+            */
 
         }
 

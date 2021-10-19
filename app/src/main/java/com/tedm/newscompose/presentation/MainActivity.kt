@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
                             Screen.HistoryScreen.route,
 
                         ),
+                        state = scaffoldState,
                         modifier = Modifier.fillMaxSize(),
                     ) {
                         Navigation(navController = navController, scaffoldState)
