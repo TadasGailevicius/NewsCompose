@@ -26,7 +26,7 @@ class WeatherRepositoryImpl @Inject constructor(
             }
 
             if(maxItem < 5) {
-                var historyItem = com.tedm.newscompose.domain.local.entities.HistoryItem(
+                val historyItem = com.tedm.newscompose.domain.local.entities.HistoryItem(
                     description = historyItem.description,
                     temp = historyItem.temp,
                     tempMax = historyItem.tempMax,
@@ -38,7 +38,7 @@ class WeatherRepositoryImpl @Inject constructor(
             } else {
                 dao.deleteHistoryItemById(0)
                 dao.updateHistory()
-                var historyItem = com.tedm.newscompose.domain.local.entities.HistoryItem(
+                val historyItem = com.tedm.newscompose.domain.local.entities.HistoryItem(
                     description = historyItem.description,
                     temp = historyItem.temp,
                     tempMax = historyItem.tempMax,
