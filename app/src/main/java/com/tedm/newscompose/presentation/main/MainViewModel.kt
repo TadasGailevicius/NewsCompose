@@ -4,7 +4,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tedm.newscompose.domain.models.HistoryItem
 import com.tedm.newscompose.domain.use_case.WeatherUseCases
 import com.tedm.newscompose.repository.WeatherRepository
 import com.tedm.newscompose.util.Resource
@@ -46,28 +45,41 @@ class MainViewModel @Inject constructor(
     private val _state = mutableStateOf(WeatherState())
     val state: State<WeatherState> = _state
 
+    private fun insertHistoryItem() = viewModelScope.launch {
+        repository.insertHistoryItem(weatherModel = state.value.weatherModel)
+    }
+
     fun getWeather() {
         viewModelScope.launch {
             _state.value = state.value.copy(
                 isLoading = true
             )
             val result = weatherUseCases.getWeather(
-                cityName = _cityText.value ?: ""
+                cityName = _cityText.value
             )
             when (result) {
                 is Resource.Success -> {
                     _state.value = state.value.copy(
-                        historyItem = result.data,
+                        weatherModel = result.data,
                         isLoading = false
                     )
+                    insertHistoryItem()
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackbar(
+                            uiText = result.uiText ?: UiText.cityHasBeenLoaded()
+                        )
+                    )
+
                 }
                 is Resource.Error -> {
                     _state.value = state.value.copy(
                         isLoading = false
                     )
-                    _eventFlow.emit(UiEvent.ShowSnackbar(
-                        uiText = result.uiText ?: UiText.unknownError()
-                    ))
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackbar(
+                            uiText = result.uiText ?: UiText.unknownError()
+                        )
+                    )
                 }
             }
         }

@@ -9,7 +9,10 @@ sealed class UiText {
 
     companion object {
         fun unknownError(): UiText {
-            return UiText.StringResource(R.string.error_unknown)
+            return StringResource(R.string.error_unknown)
+        }
+        fun cityHasBeenLoaded(): UiText {
+            return StringResource(R.string.city_loaded)
         }
     }
 }

@@ -21,18 +21,13 @@ import androidx.navigation.NavController
 import com.tedm.newscompose.presentation.ui.theme.SpaceLarge
 import com.tedm.newscompose.presentation.ui.theme.SpaceMedium
 import com.tedm.newscompose.R
-import com.tedm.newscompose.domain.models.HistoryItem
 import com.tedm.newscompose.presentation.components.CustomButton
-import com.tedm.newscompose.presentation.components.HistoryItem
 import com.tedm.newscompose.presentation.components.StandardTextField
 import com.tedm.newscompose.presentation.ui.theme.SpaceSmall
 import com.tedm.newscompose.presentation.util.Screen
-import com.tedm.newscompose.util.Resource
 import com.tedm.newscompose.util.UiEvent
 import com.tedm.newscompose.util.asString
 import kotlinx.coroutines.flow.collectLatest
-import java.lang.Math.round
-import kotlin.math.roundToInt
 
 @Composable
 fun MainScreen(
@@ -42,15 +37,9 @@ fun MainScreen(
 ) {
 
     val state = viewModel.state.value
-    var description by remember { mutableStateOf("") }
-    var temp by remember { mutableStateOf(0.0) }
-    var tempMax by remember { mutableStateOf(0.0) }
-    var dt by remember { mutableStateOf(0) }
-    var name by remember { mutableStateOf("") }
 
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
-        viewModel.getWeather()
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
                 is UiEvent.ShowSnackbar -> {
@@ -60,7 +49,6 @@ fun MainScreen(
                 }
             }
         }
-
     }
 
     Box(
@@ -82,7 +70,7 @@ fun MainScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Logo",
+                contentDescription = stringResource(id = R.string.logo),
                 modifier = Modifier
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
@@ -102,13 +90,6 @@ fun MainScreen(
                 IconButton(
                     onClick = {
                         viewModel.getWeather()
-                        state.historyItem?.let { historyItem ->
-                            description = historyItem.description
-                            temp = historyItem.temp
-                            tempMax = historyItem.tempMax
-                            dt = historyItem.dt
-                            name = historyItem.name
-                        }
                     },
                     modifier = Modifier
                         .weight(2f)
@@ -120,13 +101,13 @@ fun MainScreen(
                                 bottomStart = 0.dp
                             )
                         )
-                        .fillMaxHeight()
+                        .fillMaxSize()
                         .background(Color.White)
 
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.arrow_green),
-                        contentDescription = "Button"
+                        contentDescription = "Button",
                     )
                 }
             }
@@ -136,16 +117,12 @@ fun MainScreen(
                     navController.navigate(Screen.HistoryScreen.route)
                 }
             )
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            HistoryItem(
-                historyItem = HistoryItem(
-                    description = description,
-                    temp = temp.roundToInt().toDouble(),
-                    tempMax = tempMax,
-                    dt = dt,
-                    name = name
-                )
-            )
+            /*
+            if(state.isLoading) {
+                CircularProgressIndicator()
+            }
+            */
+
         }
 
     }

@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.tedm.newscompose.presentation.components.StandardScaffold
 import com.tedm.newscompose.presentation.ui.theme.NewsComposeTheme
 import com.tedm.newscompose.presentation.util.Navigation
+import com.tedm.newscompose.presentation.util.Screen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,9 +34,14 @@ class MainActivity : ComponentActivity() {
                     val scaffoldState = rememberScaffoldState()
                     StandardScaffold(
                         navController = navController,
-                        modifier = Modifier.fillMaxSize()
+                        showBackArrow = navBackStackEntry?.destination?.route in listOf(
+                            Screen.HistoryScreen.route,
+
+                        ),
+                        state = scaffoldState,
+                        modifier = Modifier.fillMaxSize(),
                     ) {
-                        Navigation(navController = navController,scaffoldState)
+                        Navigation(navController = navController, scaffoldState)
                     }
 
 

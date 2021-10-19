@@ -1,8 +1,8 @@
 package com.tedm.newscompose.presentation.main
 
-import com.tedm.newscompose.domain.models.HistoryItem
+import com.tedm.newscompose.domain.models.WeatherModel
 
 data class WeatherState(
-    val historyItem: HistoryItem? = null,
-    val isLoading: Boolean = false
+    val weatherModel: WeatherModel? = null,
+    val isLoading: Boolean = false,
 )
