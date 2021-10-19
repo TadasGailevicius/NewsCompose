@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
@@ -48,7 +49,7 @@ fun HistoryItem(
                 Row() {
                     Icon(
                         painter = painterResource(id = R.drawable.arrow),
-                        contentDescription = "Weathwer"
+                        contentDescription = stringResource(id = R.string.arrow_icon)
                     )
                     Spacer(modifier = Modifier.width(SpaceSmall))
                     Text(
@@ -73,7 +74,18 @@ fun HistoryItem(
                             append(historyItem.name)
                         },
                         fontSize = 16.sp,
-                        style = MaterialTheme.typography.h2
+                        style = MaterialTheme.typography.h2,
+                        color = when {
+                            historyItem.temp <= 10 -> {
+                                Color.Yellow
+                            }
+                            historyItem.temp < 20 -> {
+                                Color.Red
+                            }
+                            else -> {
+                                Color.Green
+                            }
+                        }
                     )
                     Spacer(modifier = Modifier.height(SpaceSmall))
                     Text(
@@ -83,6 +95,17 @@ fun HistoryItem(
                         },
                         fontSize = 72.sp,
                         style = MaterialTheme.typography.h2,
+                        color = when {
+                            historyItem.temp <= 10 -> {
+                                Color.Green
+                            }
+                            historyItem.temp < 20 -> {
+                                Color.Yellow
+                            }
+                            else -> {
+                                Color.Red
+                            }
+                        }
                     )
                     Spacer(modifier = Modifier.height(SpaceSmall))
                     Text(
@@ -90,7 +113,18 @@ fun HistoryItem(
                             append("SAT\n01")
                         },
                         fontSize = 16.sp,
-                        style = MaterialTheme.typography.h2
+                        style = MaterialTheme.typography.h2,
+                        color = when {
+                            historyItem.temp <= 10 -> {
+                                Color.Red
+                            }
+                            historyItem.temp < 20 -> {
+                                Color.Green
+                            }
+                            else -> {
+                                Color.Yellow
+                            }
+                        }
                     )
                 }
             }

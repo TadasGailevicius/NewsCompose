@@ -116,6 +116,7 @@ fun MainScreen(
                     navController.navigate(Screen.HistoryScreen.route)
                 }
             )
+
         }
 
     }

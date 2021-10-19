@@ -3,4 +3,6 @@
     <string name="view_history">VIEW HISTORY</string>
     <string name="enter_city_name">ENTER CITY NAME</string>
     <string name="error_unknown">Unknown error</string>
+    <string name="arrow_icon">Arrow icon</string>
+    <string name="arrow_back">Arrow back</string>
 </resources>

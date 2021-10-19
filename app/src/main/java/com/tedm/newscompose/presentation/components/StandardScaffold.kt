@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 @Composable
 fun StandardScaffold(
     navController: NavController,
+    showBackArrow: Boolean = true,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
