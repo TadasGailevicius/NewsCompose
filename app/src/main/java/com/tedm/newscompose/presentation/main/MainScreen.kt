@@ -117,11 +117,9 @@ fun MainScreen(
                     navController.navigate(Screen.HistoryScreen.route)
                 }
             )
-            /*
             if(state.isLoading) {
                 CircularProgressIndicator()
             }
-            */
 
         }
 

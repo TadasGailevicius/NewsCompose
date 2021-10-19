@@ -13,7 +13,7 @@ class HistoryViewModel @Inject constructor (
     private val repository: WeatherRepository
 ) :ViewModel()  {
 
-    val notes: LiveData<List<HistoryItem>> = repository.list().asLiveData()
+    val historyItems: LiveData<List<HistoryItem>> = repository.list().asLiveData()
 
 
 

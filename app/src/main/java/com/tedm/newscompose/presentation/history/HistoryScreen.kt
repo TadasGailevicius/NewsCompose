@@ -20,7 +20,7 @@ fun HistoryScreen(
     viewModel: HistoryViewModel = hiltViewModel()
 ) {
     val isLoading = remember { mutableStateOf(true) }
-    val items by viewModel.notes.observeAsState()
+    val items by viewModel.historyItems.observeAsState()
 
     Column(
         modifier = Modifier

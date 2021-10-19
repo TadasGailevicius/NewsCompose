@@ -17,6 +17,32 @@ class WeatherRepositoryImpl @Inject constructor(
     private val api: WeatherApi
 ) : WeatherRepository {
 
+    private suspend fun insertHistoryItemUnderLimit(weatherModel: WeatherModel, maxItem: Int) {
+        val historyItem = HistoryItem(
+            description = weatherModel.description,
+            temp = weatherModel.temp,
+            tempMax = weatherModel.tempMax,
+            dt = weatherModel.dt,
+            name = weatherModel.name,
+            id = maxItem
+        )
+        dao.insertHistoryItem(historyItem)
+    }
+
+    private suspend fun insertHistoryItemOverLimit(weatherModel: WeatherModel) {
+        dao.deleteHistoryItemById(0)
+        dao.updateHistory()
+        val historyItem = HistoryItem(
+            description = weatherModel.description,
+            temp = weatherModel.temp,
+            tempMax = weatherModel.tempMax,
+            dt = weatherModel.dt,
+            name = weatherModel.name,
+            id = 4
+        )
+        dao.insertHistoryItem(historyItem)
+    }
+
     override suspend fun insertHistoryItem(weatherModel: WeatherModel?) {
         if (weatherModel != null) {
             var maxItem = dao.getMaxHistoryItemId()
@@ -27,27 +53,10 @@ class WeatherRepositoryImpl @Inject constructor(
             }
 
             if(maxItem < 5) {
-                val historyItem = HistoryItem(
-                    description = weatherModel.description,
-                    temp = weatherModel.temp,
-                    tempMax = weatherModel.tempMax,
-                    dt = weatherModel.dt,
-                    name = weatherModel.name,
-                    id = maxItem
-                )
-                dao.insertHistoryItem(historyItem)
+                insertHistoryItemUnderLimit(weatherModel, maxItem)
             } else {
-                dao.deleteHistoryItemById(0)
-                dao.updateHistory()
-                val historyItem = HistoryItem(
-                    description = weatherModel.description,
-                    temp = weatherModel.temp,
-                    tempMax = weatherModel.tempMax,
-                    dt = weatherModel.dt,
-                    name = weatherModel.name,
-                    id = 4
-                )
-                dao.insertHistoryItem(historyItem)
+                insertHistoryItemOverLimit(weatherModel)
+
             }
         }
     }
