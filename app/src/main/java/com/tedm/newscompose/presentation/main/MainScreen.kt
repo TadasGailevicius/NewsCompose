@@ -28,7 +28,6 @@ import com.tedm.newscompose.presentation.util.Screen
 import com.tedm.newscompose.util.UiEvent
 import com.tedm.newscompose.util.asString
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @Composable
 fun MainScreen(
@@ -71,7 +70,7 @@ fun MainScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Logo",
+                contentDescription = stringResource(id = R.string.logo),
                 modifier = Modifier
             )
             Spacer(modifier = Modifier.height(SpaceMedium))

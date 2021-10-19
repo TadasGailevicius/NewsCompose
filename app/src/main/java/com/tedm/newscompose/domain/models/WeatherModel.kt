@@ -1,6 +1,6 @@
 package com.tedm.newscompose.domain.models
 
-data class HistoryItem(
+data class WeatherModel(
     val description: String,
     val temp: Double,
     val tempMax: Double,

@@ -6,4 +6,5 @@
     <string name="arrow_icon">Arrow icon</string>
     <string name="arrow_back">Arrow back</string>
     <string name="city_loaded">Weather of the city has been loaded</string>
+    <string name="logo">Logo</string>
 </resources>

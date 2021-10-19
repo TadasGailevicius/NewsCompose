@@ -46,7 +46,7 @@ class MainViewModel @Inject constructor(
     val state: State<WeatherState> = _state
 
     private fun insertHistoryItem() = viewModelScope.launch {
-        repository.insertHistoryItem(historyItem = state.value.historyItem)
+        repository.insertHistoryItem(weatherModel = state.value.weatherModel)
     }
 
     fun getWeather() {
@@ -60,7 +60,7 @@ class MainViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     _state.value = state.value.copy(
-                        historyItem = result.data,
+                        weatherModel = result.data,
                         isLoading = false
                     )
                     insertHistoryItem()

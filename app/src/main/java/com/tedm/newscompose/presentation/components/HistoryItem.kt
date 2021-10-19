@@ -16,12 +16,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
-import com.tedm.newscompose.domain.models.HistoryItem
+import com.tedm.newscompose.domain.models.WeatherModel
 import com.tedm.newscompose.presentation.ui.theme.SpaceMedium
 import com.tedm.newscompose.presentation.ui.theme.SpaceSmall
 import com.tedm.newscompose.R
-import java.security.Timestamp
-import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.TextStyle
@@ -31,7 +29,7 @@ import kotlin.math.roundToInt
 @Composable
 fun HistoryItem(
     modifier: Modifier = Modifier,
-    historyItem: HistoryItem,
+    weatherModel: WeatherModel,
     onHistoryItemClick: () -> Unit = {}
 ) {
     Box(
@@ -61,7 +59,7 @@ fun HistoryItem(
                     Spacer(modifier = Modifier.width(SpaceSmall))
                     Text(
                         text = buildAnnotatedString {
-                            append(historyItem.description)
+                            append(weatherModel.description)
                         },
                         style = MaterialTheme.typography.body2,
                         overflow = TextOverflow.Ellipsis,
@@ -78,15 +76,15 @@ fun HistoryItem(
                 ) {
                     Text(
                         text = buildAnnotatedString {
-                            append(historyItem.name)
+                            append(weatherModel.name)
                         },
                         fontSize = 20.sp,
                         style = MaterialTheme.typography.h2,
                         color = when {
-                            historyItem.temp <= 10 -> {
+                            weatherModel.temp <= 10 -> {
                                 Color.Yellow
                             }
-                            historyItem.temp < 20 -> {
+                            weatherModel.temp < 20 -> {
                                 Color.Red
                             }
                             else -> {
@@ -97,16 +95,16 @@ fun HistoryItem(
                     Spacer(modifier = Modifier.height(SpaceSmall))
                     Text(
                         text = buildAnnotatedString {
-                            append(historyItem.temp.roundToInt().toString())
+                            append(weatherModel.temp.roundToInt().toString())
                             append("°")
                         },
                         fontSize = 96.sp,
                         style = MaterialTheme.typography.h2,
                         color = when {
-                            historyItem.temp <= 10 -> {
+                            weatherModel.temp <= 10 -> {
                                 Color.Green
                             }
-                            historyItem.temp < 20 -> {
+                            weatherModel.temp < 20 -> {
                                 Color.Yellow
                             }
                             else -> {
@@ -120,7 +118,7 @@ fun HistoryItem(
                     ) {
                         Text(
                             text = buildAnnotatedString {
-                                val dt = Instant.ofEpochSecond(historyItem.dt.toLong())
+                                val dt = Instant.ofEpochSecond(weatherModel.dt.toLong())
                                     .atZone(ZoneId.systemDefault())
                                     .toLocalDateTime()
                                 append(dt.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US).toString())
@@ -128,10 +126,10 @@ fun HistoryItem(
                             fontSize = 20.sp,
                             style = MaterialTheme.typography.h2,
                             color = when {
-                                historyItem.temp <= 10 -> {
+                                weatherModel.temp <= 10 -> {
                                     Color.Red
                                 }
-                                historyItem.temp < 20 -> {
+                                weatherModel.temp < 20 -> {
                                     Color.Green
                                 }
                                 else -> {
@@ -142,7 +140,7 @@ fun HistoryItem(
 
                         Text(
                             text = buildAnnotatedString {
-                                val dt = Instant.ofEpochSecond(historyItem.dt.toLong())
+                                val dt = Instant.ofEpochSecond(weatherModel.dt.toLong())
                                     .atZone(ZoneId.systemDefault())
                                     .toLocalDateTime()
                                 append(dt.dayOfMonth.toString())
@@ -150,10 +148,10 @@ fun HistoryItem(
                             fontSize = 20.sp,
                             style = MaterialTheme.typography.h2,
                             color = when {
-                                historyItem.temp <= 10 -> {
+                                weatherModel.temp <= 10 -> {
                                     Color.Red
                                 }
-                                historyItem.temp < 20 -> {
+                                weatherModel.temp < 20 -> {
                                     Color.Green
                                 }
                                 else -> {

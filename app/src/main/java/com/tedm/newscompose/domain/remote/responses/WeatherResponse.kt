@@ -1,6 +1,6 @@
 package com.tedm.newscompose.domain.remote.responses
 
-import com.tedm.newscompose.domain.models.HistoryItem
+import com.tedm.newscompose.domain.models.WeatherModel
 
 data class Clouds(
     val all: Int
@@ -56,8 +56,8 @@ data class WeatherResponse(
     val weather: List<Weather>,
     val wind: Wind
 ) {
-    fun toHistoryItem() : HistoryItem {
-        return HistoryItem(
+    fun toHistoryItem() : WeatherModel {
+        return WeatherModel(
             description = weather[0].description,
             temp = main.temp - 273.15,
             tempMax = main.temp_max - 273.15,
