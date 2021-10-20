@@ -122,7 +122,10 @@ fun HistoryItem(
                                 val dt = Instant.ofEpochSecond(weatherModel.dt.toLong())
                                     .atZone(ZoneId.systemDefault())
                                     .toLocalDateTime()
-                                append(dt.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US).toString())
+                                append(
+                                    dt.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US)
+                                        .toString()
+                                )
                             },
                             fontSize = 20.sp,
                             style = MaterialTheme.typography.h2,

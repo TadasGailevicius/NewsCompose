@@ -9,13 +9,10 @@ import javax.inject.Inject
 import androidx.lifecycle.asLiveData
 
 @HiltViewModel
-class HistoryViewModel @Inject constructor (
+class HistoryViewModel @Inject constructor(
     repository: WeatherRepository
-) :ViewModel()  {
+) : ViewModel() {
 
     val historyItems: LiveData<List<HistoryItem>> = repository.list().asLiveData()
-
-
-
 
 }

@@ -35,7 +35,12 @@ fun CustomButton(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
-                modifier = Modifier.padding(start = 48.dp,bottom = SpaceMedium, top = SpaceMedium, end = 48.dp)
+                modifier = Modifier.padding(
+                    start = 48.dp,
+                    bottom = SpaceMedium,
+                    top = SpaceMedium,
+                    end = 48.dp
+                )
             ) {
                 Text(
                     text = stringResource(id = R.string.view_history),

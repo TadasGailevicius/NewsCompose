@@ -28,7 +28,8 @@ object AppModule {
     @Provides
     fun provideHistoryItemDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(context, HistoryItemDatabase::class.java, DATABASE_NAME).allowMainThreadQueries().build()
+    ) = Room.databaseBuilder(context, HistoryItemDatabase::class.java, DATABASE_NAME)
+        .allowMainThreadQueries().build()
 
     @Singleton
     @Provides
@@ -40,7 +41,7 @@ object AppModule {
         dao: HistoryItemDao,
         api: WeatherApi
     ): WeatherRepository {
-        return WeatherRepositoryImpl(dao,api)
+        return WeatherRepositoryImpl(dao, api)
     }
 
     @Singleton

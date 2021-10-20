@@ -50,13 +50,13 @@ class WeatherRepositoryImpl @Inject constructor(
     override suspend fun insertHistoryItem(weatherModel: WeatherModel?) {
         if (weatherModel != null) {
             var maxItem = dao.getMaxHistoryItemId()
-            maxItem = if(maxItem == null) {
+            maxItem = if (maxItem == null) {
                 0
             } else {
                 maxItem + 1
             }
 
-            if(maxItem < 5) {
+            if (maxItem < 5) {
                 insertHistoryItemUnderLimit(weatherModel, maxItem)
             } else {
                 insertHistoryItemOverLimit(weatherModel)
@@ -64,6 +64,7 @@ class WeatherRepositoryImpl @Inject constructor(
             }
         }
     }
+
     override suspend fun getWeatherInfo(cityName: String): Resource<WeatherModel> {
         val response = try {
             api.getWeatherInfo(cityName = cityName)

@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                         showBackArrow = navBackStackEntry?.destination?.route in listOf(
                             Screen.HistoryScreen.route,
 
-                        ),
+                            ),
                         state = scaffoldState,
                         modifier = Modifier.fillMaxSize(),
                     ) {

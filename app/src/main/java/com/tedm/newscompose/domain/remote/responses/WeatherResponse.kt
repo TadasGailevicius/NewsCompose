@@ -56,7 +56,7 @@ data class WeatherResponse(
     val weather: List<Weather>,
     val wind: Wind
 ) {
-    fun toHistoryItem() : WeatherModel {
+    fun toHistoryItem(): WeatherModel {
         return WeatherModel(
             description = weather[0].description,
             temp = main.temp - 273.15,
