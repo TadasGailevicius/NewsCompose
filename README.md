@@ -1,8 +1,9 @@
 # NewsCompose
 <p align="center">  
-News App Using Compose
+News App Using Jetpack Compose
 </p>
 </br>
+<p align="center"><img src="testair_app.jpg" width="650"/></p>
 
 ## Tech stack & Open-source libraries
 - Minimum SDK level 28
