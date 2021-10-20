@@ -21,6 +21,7 @@ class WeatherRepositoryImpl @Inject constructor(
         val historyItem = HistoryItem(
             description = weatherModel.description,
             temp = weatherModel.temp,
+            tempMin = weatherModel.tempMin,
             tempMax = weatherModel.tempMax,
             dt = weatherModel.dt,
             name = weatherModel.name,
@@ -36,6 +37,7 @@ class WeatherRepositoryImpl @Inject constructor(
         val historyItem = HistoryItem(
             description = weatherModel.description,
             temp = weatherModel.temp,
+            tempMin = weatherModel.tempMin,
             tempMax = weatherModel.tempMax,
             dt = weatherModel.dt,
             name = weatherModel.name,
@@ -51,7 +53,7 @@ class WeatherRepositoryImpl @Inject constructor(
             maxItem = if(maxItem == null) {
                 0
             } else {
-                maxItem!! + 1
+                maxItem + 1
             }
 
             if(maxItem < 5) {

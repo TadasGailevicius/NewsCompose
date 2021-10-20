@@ -12,7 +12,8 @@
         android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NewsCompose">
+        android:theme="@style/Theme.NewsCompose"
+        android:fullBackupContent="@xml/backup_descriptor">
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"

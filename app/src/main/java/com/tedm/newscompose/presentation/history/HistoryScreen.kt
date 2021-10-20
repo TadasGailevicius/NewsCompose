@@ -39,6 +39,7 @@ fun HistoryScreen(
                         weatherModel = com.tedm.newscompose.domain.models.WeatherModel(
                             description = historyItem.description,
                             temp = historyItem.temp.roundToInt().toDouble(),
+                            tempMin = historyItem.tempMin,
                             tempMax = historyItem.tempMax,
                             dt = historyItem.dt,
                             name = historyItem.name,

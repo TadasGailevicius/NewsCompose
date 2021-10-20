@@ -60,6 +60,7 @@ data class WeatherResponse(
         return WeatherModel(
             description = weather[0].description,
             temp = main.temp - 273.15,
+            tempMin = main.temp_min - 273.15,
             tempMax = main.temp_max - 273.15,
             dt = dt,
             name = name,

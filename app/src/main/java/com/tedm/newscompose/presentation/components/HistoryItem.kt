@@ -50,7 +50,7 @@ fun HistoryItem(
                     .fillMaxWidth()
                     .padding(SpaceMedium)
             ) {
-                Row() {
+                Row {
                     Image(
                         painter = rememberImagePainter("http://openweathermap.org/img/wn/${weatherModel.icon}@2x.png"),
                         contentDescription = null,

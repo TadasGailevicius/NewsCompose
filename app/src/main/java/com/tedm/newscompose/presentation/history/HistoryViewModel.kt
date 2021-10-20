@@ -10,7 +10,7 @@ import androidx.lifecycle.asLiveData
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor (
-    private val repository: WeatherRepository
+    repository: WeatherRepository
 ) :ViewModel()  {
 
     val historyItems: LiveData<List<HistoryItem>> = repository.list().asLiveData()
