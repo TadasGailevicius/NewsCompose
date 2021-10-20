@@ -41,7 +41,8 @@ fun HistoryScreen(
                             temp = historyItem.temp.roundToInt().toDouble(),
                             tempMax = historyItem.tempMax,
                             dt = historyItem.dt,
-                            name = historyItem.name
+                            name = historyItem.name,
+                            icon = historyItem.icon
                         )
                     )
                 }

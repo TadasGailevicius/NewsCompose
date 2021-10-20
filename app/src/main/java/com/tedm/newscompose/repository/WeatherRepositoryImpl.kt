@@ -24,6 +24,7 @@ class WeatherRepositoryImpl @Inject constructor(
             tempMax = weatherModel.tempMax,
             dt = weatherModel.dt,
             name = weatherModel.name,
+            icon = weatherModel.icon,
             id = maxItem
         )
         dao.insertHistoryItem(historyItem)
@@ -38,6 +39,7 @@ class WeatherRepositoryImpl @Inject constructor(
             tempMax = weatherModel.tempMax,
             dt = weatherModel.dt,
             name = weatherModel.name,
+            icon = weatherModel.icon,
             id = 4
         )
         dao.insertHistoryItem(historyItem)

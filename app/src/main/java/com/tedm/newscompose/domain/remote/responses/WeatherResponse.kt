@@ -63,6 +63,7 @@ data class WeatherResponse(
             tempMax = main.temp_max - 273.15,
             dt = dt,
             name = name,
+            icon = weather[0].icon
         )
     }
 }

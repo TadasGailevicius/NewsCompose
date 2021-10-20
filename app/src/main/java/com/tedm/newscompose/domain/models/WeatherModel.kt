@@ -5,5 +5,6 @@ data class WeatherModel(
     val temp: Double,
     val tempMax: Double,
     val dt: Int,
-    val name: String
+    val name: String,
+    val icon: String
 )

@@ -10,6 +10,7 @@ data class HistoryItem(
     val tempMax: Double,
     val dt: Int,
     val name: String,
+    val icon: String,
     @PrimaryKey(autoGenerate = false)
     val id: Int
 )
