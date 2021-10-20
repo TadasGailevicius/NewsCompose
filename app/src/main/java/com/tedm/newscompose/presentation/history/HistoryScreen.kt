@@ -19,7 +19,6 @@ fun HistoryScreen(
     navController: NavController,
     viewModel: HistoryViewModel = hiltViewModel()
 ) {
-    val isLoading = remember { mutableStateOf(true) }
     val items by viewModel.historyItems.observeAsState()
 
     Column(
