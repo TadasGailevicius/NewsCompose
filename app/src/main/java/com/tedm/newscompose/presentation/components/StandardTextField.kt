@@ -27,10 +27,10 @@ fun StandardTextField(
     modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
-    maxLength: Int = 40,
+    maxLength: Int = 85,
     error: String = "",
     textStyle: TextStyle = TextStyle(
-        color = Color(0xFF92c83f)
+        color = MaterialTheme.colors.primary
     ),
     singleLine: Boolean = true,
     maxLines: Int = 1,
@@ -38,7 +38,6 @@ fun StandardTextField(
     keyboardType: KeyboardType = KeyboardType.Text,
     isPasswordToggleDisplayed: Boolean = keyboardType == KeyboardType.Password,
     showPasswordToggle: Boolean = false,
-    onPasswordToggleClick: (Boolean) -> Unit = {},
     onValueChange: (String) -> Unit
 ) {
     Column(
@@ -60,7 +59,7 @@ fun StandardTextField(
                 Text(
                     text = hint,
                     style = MaterialTheme.typography.body1,
-                    color = Color(0xFF92c83f)
+                    color = MaterialTheme.colors.primary
                 )
             },
             isError = error != "",

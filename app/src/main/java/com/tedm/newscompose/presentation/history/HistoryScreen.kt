@@ -19,8 +19,7 @@ fun HistoryScreen(
     navController: NavController,
     viewModel: HistoryViewModel = hiltViewModel()
 ) {
-    val isLoading = remember { mutableStateOf(true) }
-    val items by viewModel.notes.observeAsState()
+    val items by viewModel.historyItems.observeAsState()
 
     Column(
         modifier = Modifier
@@ -39,9 +38,11 @@ fun HistoryScreen(
                         weatherModel = com.tedm.newscompose.domain.models.WeatherModel(
                             description = historyItem.description,
                             temp = historyItem.temp.roundToInt().toDouble(),
+                            tempMin = historyItem.tempMin,
                             tempMax = historyItem.tempMax,
                             dt = historyItem.dt,
-                            name = historyItem.name
+                            name = historyItem.name,
+                            icon = historyItem.icon
                         )
                     )
                 }

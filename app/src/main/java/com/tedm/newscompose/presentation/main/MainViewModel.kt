@@ -34,11 +34,7 @@ class MainViewModel @Inject constructor(
         _cityText.value = username
     }
 
-    fun setIsCityError(error: String) {
-        _cityError.value = error
-    }
-
-    fun getCityName(): String {
+    private fun getCityName(): String {
         return _cityText.value
     }
 
@@ -55,7 +51,7 @@ class MainViewModel @Inject constructor(
                 isLoading = true
             )
             val result = weatherUseCases.getWeather(
-                cityName = _cityText.value
+                cityName = getCityName()
             )
             when (result) {
                 is Resource.Success -> {
