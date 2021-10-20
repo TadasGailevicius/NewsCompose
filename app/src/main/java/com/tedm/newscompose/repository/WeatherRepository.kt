@@ -9,7 +9,7 @@ interface WeatherRepository {
 
     suspend fun insertHistoryItem(weatherModel: WeatherModel?)
 
-    suspend fun getWeatherInfo(cityName: String) : Resource<WeatherModel>
+    suspend fun getWeatherInfo(cityName: String): Resource<WeatherModel>
 
     fun list(): Flow<List<HistoryItem>>
 }

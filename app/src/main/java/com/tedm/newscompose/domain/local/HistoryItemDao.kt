@@ -22,12 +22,12 @@ interface HistoryItemDao {
     fun getAllHistoryItems(): Flow<List<HistoryItem>>
 
     @Query("SELECT Count(*) FROM history")
-    fun getAllHistoryItemsQuantity() : Int
+    fun getAllHistoryItemsQuantity(): Int
 
     @Query("SELECT MAX(id) FROM history")
-    fun getMaxHistoryItemId() : Int?
+    fun getMaxHistoryItemId(): Int?
 
     @Query("UPDATE history SET id = id - 1 ")
-    fun updateHistory() : Int?
+    fun updateHistory(): Int?
 
 }

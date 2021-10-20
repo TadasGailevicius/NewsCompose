@@ -43,7 +43,14 @@ fun StandardTextField(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(topStart = 16.dp,topEnd = 0.dp,bottomEnd = 0.dp,bottomStart = 16.dp))
+            .clip(
+                RoundedCornerShape(
+                    topStart = 16.dp,
+                    topEnd = 0.dp,
+                    bottomEnd = 0.dp,
+                    bottomStart = 16.dp
+                )
+            )
             .background(Color.White)
     ) {
         TextField(

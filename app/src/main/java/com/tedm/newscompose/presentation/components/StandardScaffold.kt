@@ -20,5 +20,5 @@ fun StandardScaffold(
     ) {
         content()
     }
-    
+
 }
