@@ -1,7 +1,7 @@
 package com.tedm.newscompose.domain.remote
 
+import com.tedm.newscompose.BuildConfig
 import com.tedm.newscompose.domain.remote.responses.WeatherResponse
-import com.tedm.newscompose.util.Constants.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,6 +12,6 @@ interface WeatherApi {
         @Query("q")
         cityName: String,
         @Query("appid")
-        apiKey: String = API_KEY
+        apiKey: String = BuildConfig.API_KEY
     ): WeatherResponse
 }
