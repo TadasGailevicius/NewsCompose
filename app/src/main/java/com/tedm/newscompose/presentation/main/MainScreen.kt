@@ -120,8 +120,6 @@ fun MainScreen(
             if (state.isLoading) {
                 CircularProgressIndicator()
             }
-
         }
-
     }
 }

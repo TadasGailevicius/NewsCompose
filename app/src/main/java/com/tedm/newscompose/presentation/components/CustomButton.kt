@@ -47,7 +47,6 @@ fun CustomButton(
                     color = Color.White
                 )
             }
-
         }
     }
 
